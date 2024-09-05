@@ -1,0 +1,30 @@
+html, body{
+	margin: 0px;
+	padding: 0px;
+	height: 100vh;
+	background-color: #ff5722;
+	color: #ffffff;
+	overscroll-behavior-y: none;
+}
+
+body{
+	display: flex;
+	align-text: center;
+	justify-content: center;
+}
+
+#screen{
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	display: flex;
+	align-text: center;
+	justify-content: center;
+}
+
+pre{
+	margin: 0px;
+}
+
+
+
