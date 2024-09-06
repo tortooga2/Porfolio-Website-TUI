@@ -24,6 +24,7 @@ let scrollVelocity = 0;
 
 
 
+
 const test = document.createElement("pre");
 
 showHere.appendChild(test);
@@ -61,15 +62,7 @@ function fragmentFunction(x, y) {
 
 
 
-
-
-
-
-
-
-
-const drawScreen = () => {
-  display_surface = "";
+const drawBackground = () => {
   for (let i = 0; i < width; i++) {
     for (let j = 0; j < height; j++) {
       display_surface += fragmentFunction(i, j)
@@ -78,6 +71,14 @@ const drawScreen = () => {
       display_surface += "\n";
     }
   }
+
+}
+
+
+
+const drawScreen = () => {
+  display_surface = "";
+  drawBackground();
   test.innerText = display_surface;
 }
 

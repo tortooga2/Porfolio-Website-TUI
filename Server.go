@@ -17,8 +17,9 @@ func main() {
 	e.GET("/", home)
 
 	e.Logger.Fatal(e.Start(":5501"))
-
 }
+
+//Some new stuff
 
 func home(c echo.Context) error {
 	html, err := os.ReadFile("./index.html")
