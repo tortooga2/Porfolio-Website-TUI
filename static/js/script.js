@@ -1,4 +1,3 @@
-
 const showHere = document.getElementById("screen")
 
 //showHere.style.whiteSpace = "break-spaces"
@@ -25,6 +24,8 @@ let scrollVelocity = 0;
 
 
 
+
+
 const test = document.createElement("pre");
 
 showHere.appendChild(test);
@@ -44,23 +45,35 @@ function lumToChar(lum) {
   return lum_map[index];
 }
 
+
+
 //Sun Rise/Set
 //
-//function fragmentFunction(x, y) {
+//function fragmentFunction2(x, y) {
 //  let x1 = x / width;
 //  let y1 = y / height;
 //  return lumToChar(x1 * y1 * Math.abs(Math.cos(time)))
 //}
 
+
+
+//function fragmentFunction(x, y) {
+//  let yVal = 5 * Math.cos(x * (0.3 * Math.abs(Math.cos(time * 0.1))) + time * 16.0 + scrollAmount) + 20 * Math.sin(x * 0.01 + scrollAmount * 0.01) + (height / 2);
+//  scrollDeta = 0;
+//  let lum = Math.abs(yVal - y);
+//  lum /= height;
+//  return lumToChar(lum);
+//};
+
 function fragmentFunction(x, y) {
-  let yVal = 5 * Math.cos(x * (0.3 * Math.abs(Math.cos(time * 0.1))) + time * 16.0 + scrollAmount) + 70 * Math.sin(x * 0.01 + scrollAmount * 0.01) + (height / 2);
-  scrollDeta = 0;
-  let lum = Math.abs(yVal - y);
-  lum /= height;
-  return lumToChar(lum);
-};
-
-
+  let n = noise.simplex3((x + scrollAmount * 2) / 50, y / 50, scrollAmount / 100);
+  if (n < 0.0) {
+    return " "
+  }
+  else {
+    return lumToChar(n);
+  }
+}
 
 const drawBackground = () => {
   for (let i = 0; i < width; i++) {
