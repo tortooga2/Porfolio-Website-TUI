@@ -5,8 +5,8 @@ const showHere = document.getElementById("screen")
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
-let width = Math.round(nHeight / 15) - 0;
-let height = Math.round(nWidth / 7.828) - 1;
+let height = Math.round(nHeight / 15) - 0;
+let width = Math.round(nWidth / 7.828) - 1;
 
 let time = 0;
 
@@ -14,15 +14,27 @@ let scrollAmount = 0;
 let scrollDeta = 0;
 
 const lum_map = " .:-=+*#%@";
-const lum_map_ratio = lum_map.length;
 
-let display_surface = "";
+const noise_map = " .,|/)("
+
+//const lum_map_ratio = lum_map.length;
+
+let display_surface = [];
 
 
 let scrollVelocity = 0;
 
 
-
+const title = [`    ,o888888o.    8 8888        8          .8.            d888888o.   8 8888888888             b.             8          .8.           ,o888888o.    8 8888         8 8888888888   `,
+  `   8888     \`88.  8 8888        8         .888.         .\`8888:' \`88. 8 8888                   888o.          8         .888.         8888     \`88.  8 8888         8 8888         `,
+  `,8 8888       \`8. 8 8888        8        :88888.        8.\`8888.   Y8 8 8888                   Y88888o.       8        :88888.     ,8 8888       \`8. 8 8888         8 8888         `,
+  `88 8888           8 8888        8       . \`88888.       \`8.\`8888.     8 8888                   .\`Y888888o.    8       . \`88888.    88 8888           8 8888         8 8888         `,
+  `88 8888           8 8888        8      .8. \`88888.       \`8.\`8888.    8 888888888888           8o. \`Y888888o. 8      .8. \`88888.   88 8888           8 8888         8 888888888888 `,
+  `88 8888           8 8888        8     .8\`8. \`88888.       \`8.\`8888.   8 8888                   8\`Y8o. \`Y88888o8     .8\`8. \`88888.  88 8888           8 8888         8 8888         `,
+  `88 8888           8 8888888888888    .8' \`8. \`88888.       \`8.\`8888.  8 8888                   8   \`Y8o. \`Y8888    .8' \`8. \`88888. 88 8888   8888888 8 8888         8 8888         `,
+  `\`8 8888       .8' 8 8888        8   .8'   \`8. \`88888.  8b   \`8.\`8888. 8 8888                   8      \`Y8o. \`Y8   .8'   \`8. \`88888.\`8 8888       .8' 8 8888         8 8888         `,
+  `   8888     ,88'  8 8888        8  .888888888. \`88888. \`8b.  ;8.\`8888 8 8888                   8         \`Y8o.\`  .888888888. \`88888.  8888     ,88'  8 8888         8 8888         `,
+  `    \`8888888P'    8 8888        8 .8'       \`8. \`88888. \`Y8888P ,88P' 8 888888888888           8            \`Yo .8'       \`8. \`88888.  \`8888888P'    8 888888888888 8 888888888888 `]
 
 
 
@@ -38,11 +50,12 @@ addEventListener("wheel", (event) => {
 
 
 
-function lumToChar(lum) {
+function lumToChar(lum, map) {
 
   lum = Math.max(Math.min(lum, 1.0), 0.0)
+  let lum_map_ratio = map.length;
   let index = Math.floor(lum * lum_map_ratio);
-  return lum_map[index];
+  return map[index];
 }
 
 
@@ -64,36 +77,80 @@ function lumToChar(lum) {
 //  lum /= height;
 //  return lumToChar(lum);
 //};
+//
+//
+
+function drawLine(str, x, y, style) {
+  console.log(display_surface.length)
+  display_surface[0] = 'C';
+  console.log(display_surface[0])
+  let width_offset = Math.round(str.length / 2);
+  let index = x + y * width;
+  for (let i = 0; i < str.length; i++) {
+    if (index > 0 && index + i < height * width) {
+      if (str[i] == '\n') {
+        y += 1;
+        x = x;
+        index = x + y * width;
+      } else {
+
+        display_surface[index + i] = `<span style="${style}">` + str[i] + `</span>`;
+      }
+
+    }
+  }
+
+}
 
 function fragmentFunction(x, y) {
-  let n = noise.simplex3((x + scrollAmount * 2) / 50, y / 50, scrollAmount / 100);
-  if (n < 0.0) {
+  let n = noise.simplex3(x / 50, y / 50, time / 10 * 3);
+  let n2 = noise.simplex2(x, y);
+
+  if (n2 > 0.7) {
+    return "*";
+  }
+  if (n < -0.5) {
     return " "
   }
-  else {
-    return lumToChar(n);
+  if (n < 0.0) {
+    return "$";
   }
+  else {
+
+    return lumToChar(n, noise_map)
+
+  }
+
 }
 
 const drawBackground = () => {
-  for (let i = 0; i < width; i++) {
-    for (let j = 0; j < height; j++) {
-      display_surface += fragmentFunction(i, j)
+  let index = 0;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      index = x + y * width;
+      display_surface[index] = fragmentFunction(x, y);
     }
-    if (i < width - 1) {
-      display_surface += "\n";
-    }
-  }
 
+    display_surface[index] = "\n";
+
+  }
 }
 
 
 
 const drawScreen = () => {
-  display_surface = "";
+  display_surface = [];
   drawBackground();
-  test.innerText = display_surface;
+  for (let i = 0; i < title.length; i++) {
+    drawLine(title[i], 1, 1 + i, "color:#ff5722; background-color: #ffffff");
+  }
+
+  test.innerHTML = display_surface.join('');
 }
+
+
+
+
 
 
 const draw = () => {
@@ -107,8 +164,8 @@ const draw = () => {
 addEventListener("resize", () => {
   nWidth = window.innerWidth;
   nHeight = window.innerHeight;
-  width = Math.round(nHeight / 15) - 1;
-  height = Math.round(nWidth / 7.828) - 1;
+  height = Math.round(nHeight / 15) - 0;
+  width = Math.round(nWidth / 7.828) - 1;
   drawScreen();
   console.log(width, height);
 })
