@@ -190,7 +190,7 @@ const draw = () => {
 addEventListener("resize", () => {
   nWidth = window.innerWidth;
   nHeight = window.innerHeight;
-  height = Math.round(nHeight / 15) - 0;
+  height = Math.round(nHeight / 15) - 1;
   width = Math.round(nWidth / 7.828) - 1;
   drawScreen();
   console.log(width, height);

@@ -12,7 +12,7 @@ html, body{
 
 body{
 	display: flex;
-	align-text: center;
+	text-align: center;
 	justify-content: center;
 }
 
@@ -21,15 +21,19 @@ body{
 	padding: 0px;
 	border: 0px;
 	display: flex;
-	align-text: center;
+	text-align: center;
 	justify-content: center;
 }
 
 pre{
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 	margin: 0px;
-	/*font-family: 'Courier New', Courier, monospace;*/
-	//font-size: 13px;
-	//font-family: 'Fira Code', monospace;
+	font-family: 'Courier New', Courier, monospace;
+	font-size: 13px;
+	/*font-family: 'Fira Code', monospace;*/
 	
 	
 }
