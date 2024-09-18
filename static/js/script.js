@@ -5,7 +5,7 @@ const showHere = document.getElementById("screen")
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
-let height = Math.round(nHeight / 15) - 0;
+let height = Math.round(nHeight / 15) - 1;
 let width = Math.round(nWidth / 7.828) - 1;
 
 let time = 0;
@@ -113,9 +113,6 @@ function lumToChar(lum, map) {
 //
 
 function drawLine(str, x, y, style) {
-  console.log(display_surface.length)
-  display_surface[0] = 'C';
-  console.log(display_surface[0])
   let width_offset = Math.round(str.length / 2);
   let index = x + y * width;
   for (let i = 0; i < str.length; i++) {
