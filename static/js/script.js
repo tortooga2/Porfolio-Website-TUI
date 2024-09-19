@@ -15,7 +15,7 @@ let scrollDeta = 0;
 
 const lum_map = " .:-=+*#%@";
 
-const noise_map = " .,|/)("
+const noise_map = " .,|/)(#"
 
 //const lum_map_ratio = lum_map.length;
 
@@ -113,18 +113,13 @@ function lumToChar(lum, map) {
 //
 
 function drawLine(str, x, y, style) {
+
   let width_offset = Math.round(str.length / 2);
   let index = x + y * width;
+
   for (let i = 0; i < str.length; i++) {
     if (index > 0 && index + i < height * width) {
-      if (str[i] == '\n') {
-        y += 1;
-        x = x;
-        index = x + y * width;
-      } else {
-
-        display_surface[index + i] = `<span style="${style}">` + str[i] + `</span>`;
-      }
+      display_surface[index + i] = `<span style="${style}">` + str[i] + `</span>`;
     }
   }
 }
@@ -146,7 +141,6 @@ function fragmentFunction(x, y) {
   else {
     return lumToChar(n, noise_map)
   }
-
 }
 
 const drawBackground = () => {
@@ -163,6 +157,8 @@ const drawBackground = () => {
 }
 
 
+const newWindow = new Window(85, 50, 6, 13);
+
 
 const drawScreen = () => {
   display_surface = [];
@@ -170,6 +166,7 @@ const drawScreen = () => {
   for (let i = 0; i < title.length; i++) {
     drawLine(title[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
   }
+  newWindow.drawWindow();
 
   test.innerHTML = display_surface.join('');
 }
