@@ -13,6 +13,8 @@ let time = 0;
 let scrollAmount = 0;
 let scrollDeta = 0;
 
+let mouseX, mouseY = 0;
+
 const lum_map = " .:-=+*#%@";
 
 const noise_map = " .,|/)(#"
@@ -94,23 +96,11 @@ function lumToChar(lum, map) {
 
 //Sun Rise/Set
 //
-//function fragmentFunction2(x, y) {
+//const fragmentFunction2 = (x, y) => {
 //  let x1 = x / width;
 //  let y1 = y / height;
 //  return lumToChar(x1 * y1 * Math.abs(Math.cos(time)))
 //}
-
-
-
-//function fragmentFunction(x, y) {
-//  let yVal = 5 * Math.cos(x * (0.3 * Math.abs(Math.cos(time * 0.1))) + time * 16.0 + scrollAmount) + 20 * Math.sin(x * 0.01 + scrollAmount * 0.01) + (height / 2);
-//  scrollDeta = 0;
-//  let lum = Math.abs(yVal - y);
-//  lum /= height;
-//  return lumToChar(lum);
-//};
-//
-//
 
 function drawLine(str, x, y, style) {
 
@@ -120,11 +110,12 @@ function drawLine(str, x, y, style) {
   for (let i = 0; i < str.length; i++) {
     if (index > 0 && index + i < height * width) {
       display_surface[index + i] = `<span style="${style}">` + str[i] + `</span>`;
+      //display_surface[index + i] = str[i];
     }
   }
 }
 
-function fragmentFunction(x, y) {
+let fragmentFunction = (x, y) => {
   let n = noise.simplex3(x / 50, y / 50, time / 10 * 3);
   let n2 = noise.simplex2(x, y);
 
@@ -158,6 +149,16 @@ const drawBackground = () => {
 
 
 const newWindow = new Window(85, 50, 6, 13);
+newWindow.setBorderStyle("round");
+newWindow.setFragFunc(fragmentFunction);
+
+
+const secondWindow = new Window(85, 50, 100, 13);
+secondWindow.setBorderStyle("double");
+secondWindow.setFragFunc(fragmentFunction);
+
+
+
 
 
 const drawScreen = () => {
@@ -167,6 +168,8 @@ const drawScreen = () => {
     drawLine(title[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
   }
   newWindow.drawWindow();
+  secondWindow.drawWindow();
+
 
   test.innerHTML = display_surface.join('');
 }
@@ -191,6 +194,12 @@ addEventListener("resize", () => {
   width = Math.round(nWidth / 7.828) - 1;
   drawScreen();
   console.log(width, height);
+})
+
+addEventListener("mousemove", (event) => {
+  mouseX = event.clientX / 7.828;
+  mouseY = event.clientY / 15;
+
 })
 
 // listen to "scroll" event
