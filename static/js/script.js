@@ -29,7 +29,12 @@ const love = '#eb6f92'
 const gold = '#f6c177'
 const foam = '#9ccfd8'
 
-const title = [
+
+let title = [];
+
+const mobile_title = [`Chase Nagle...`];
+
+const title_desktop = [
   ` ██████╗██╗  ██╗ █████╗ ███████╗███████╗    ███╗   ██╗ █████╗  ██████╗ ██╗     ███████╗`,
   `██╔════╝██║  ██║██╔══██╗██╔════╝██╔════╝    ████╗  ██║██╔══██╗██╔════╝ ██║     ██╔════╝`,
   `██║     ███████║███████║███████╗█████╗      ██╔██╗ ██║███████║██║  ███╗██║     █████╗  `,
@@ -49,6 +54,13 @@ addEventListener("wheel", (event) => {
   scrollAmount += event.deltaY * 0.007;
   scrollDeta = Math.abs(event.deltaY);
 })
+
+if (width > title_desktop[0].length) {
+  title = title_desktop;
+}
+else {
+  title = mobile_title;
+}
 
 const elements = [];
 
@@ -164,6 +176,12 @@ addEventListener("resize", () => {
   width = Math.round(nWidth / 7.828) - 1;
   delta_x -= width;
   delta_y -= height;
+  if (width < title_desktop[0].length + 20) {
+    title = mobile_title;
+  }
+  else {
+    title = title_desktop;
+  }
   elements.forEach((i) => { i.resize(width, height, delta_x, delta_y); })
   drawScreen();
 })
