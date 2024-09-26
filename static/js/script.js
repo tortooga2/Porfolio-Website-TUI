@@ -134,7 +134,7 @@ const drawScreen = () => {
   for (let i = 0; i < title.length; i++) {
     drawLine(title[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
   }
-  drawLine("Work in progress! Come back later. Or not, I push to main often ;)", 8, 10,
+  drawLine("Work in progress! Come back later. ", 8, 10,
     `color : ${love}; font-weight: bold; font-style: italic`);
   elements.forEach((i) => { i.render(); })
 
