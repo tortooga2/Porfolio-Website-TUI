@@ -9,8 +9,20 @@ class Window {
   constructor(w, h, x, y) {
     this.max_w = w;
     this.max_h = h;
+
     this.w = w;
     this.h = h;
+
+
+    if (x + w > width - 1) {
+      this.w = width - x - 1;
+    }
+    if (y + h > height - 1) {
+      this.h = height - y - 1;
+    }
+
+
+
     this.x = x;
     this.y = y;
     this.ds = [];
@@ -29,7 +41,12 @@ class Window {
 
   }
 
+
   elements = [];
+
+  //TODO: NEED TO FIX THIS. WHEN A USER GOES ONTO THE SITE THE WINDOWS DO NOT AUTOMATICALLY RESIZE
+
+
 
 
   setBorderStyle = (style) => {
@@ -43,7 +60,6 @@ class Window {
 
 
   drawBackground = () => {
-    console.log(draw)
     for (let y = 0; y < this.h; y++) {
       for (let x = 0; x < this.w; x++) {
         this.ds[y][x] = this.fragmentFunction(x, y);
@@ -129,16 +145,30 @@ class Window {
   //
   padding = 10;
 
-  resize = (x_delta, y_delta) => {
+
+
+
+  resize = (width, height, x_delta, y_delta) => {
     this.w -= x_delta;
     this.h -= y_delta;
 
     if (this.w > this.max_w || this.x + this.w < width - this.padding) this.w = this.max_w;
-    if (this.h > this.max_h) this.h = this.max_h;
+    if (this.h > this.max_h || this.y + this.h < height - this.padding) this.h = this.max_h;
 
+    // Clear and rebuild ds based on new width and height
+    if (this.w < 0 || this.h < 0) return;
+    this.ds = [];
+    for (let i = 0; i < this.h; i++) {
+      let temp = new Array(this.w);
+      for (let j = 0; j < this.w; j++) {
+        temp[j] = " ";
+      }
+      this.ds.push(temp);
+    }
   }
 
   render = () => {
+    console.log("Window width: ", this.w);
     this.drawBackground();
     this.drawBorder();
     this.onHover();

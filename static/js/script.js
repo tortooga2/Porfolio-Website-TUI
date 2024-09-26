@@ -67,6 +67,9 @@ function lumToChar(lum, map) {
 
 
 
+
+
+
 //Sun Rise/Set
 //
 //const fragmentFunction2 = (x, y) => {
@@ -127,7 +130,6 @@ const drawBackground = () => {
 
 
 
-
 const drawScreen = () => {
   display_surface = [];
   drawBackground();
@@ -146,7 +148,6 @@ const drawScreen = () => {
 
 
 const draw = () => {
-  //console.log("scroll", scrollVelocity);
   drawScreen();
   time += 0.001;
   requestAnimationFrame(draw);
@@ -156,15 +157,15 @@ const draw = () => {
 addEventListener("resize", () => {
   nWidth = window.innerWidth;
   nHeight = window.innerHeight;
-  let x_delta = width;
-  let y_delta = height;
+  let delta_x = width;
+  let delta_y = height;
+
   height = Math.round(nHeight / 15) - 1;
   width = Math.round(nWidth / 7.828) - 1;
-  x_delta -= width;
-  y_delta -= height;
-  elements.forEach((i) => { i.resize(x_delta, y_delta); })
+  delta_x -= width;
+  delta_y -= height;
+  elements.forEach((i) => { i.resize(width, height, delta_x, delta_y); })
   drawScreen();
-  console.log(width, height);
 })
 
 addEventListener("mousemove", (event) => {
@@ -174,7 +175,6 @@ addEventListener("mousemove", (event) => {
 })
 
 // listen to "scroll" event
-
 
 
 requestAnimationFrame(draw)
