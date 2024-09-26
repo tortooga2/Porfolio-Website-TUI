@@ -1,6 +1,5 @@
 const showHere = document.getElementById("screen")
 
-//showHere.style.whiteSpace = "break-spaces"
 
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
@@ -19,8 +18,6 @@ const lum_map = " .:-=+*#%@";
 
 const noise_map = " .,|/)(#"
 
-//const lum_map_ratio = lum_map.length;
-
 let display_surface = [];
 
 
@@ -31,35 +28,6 @@ const rose = '#ea9a97'
 const love = '#eb6f92'
 const gold = '#f6c177'
 const foam = '#9ccfd8'
-
-
-//const title = [`    ,o888888o.    8 8888        8          .8.            d888888o.   8 8888888888             b.             8          .8.           ,o888888o.    8 8888         8 8888888888   `,
-//  `   8888     \`88.  8 8888        8         .888.         .\`8888:' \`88. 8 8888                   888o.          8         .888.         8888     \`88.  8 8888         8 8888         `,
-//  `,8 8888       \`8. 8 8888        8        :88888.        8.\`8888.   Y8 8 8888                   Y88888o.       8        :88888.     ,8 8888       \`8. 8 8888         8 8888         `,
-//  `88 8888           8 8888        8       . \`88888.       \`8.\`8888.     8 8888                   .\`Y888888o.    8       . \`88888.    88 8888           8 8888         8 8888         `,
-//  `88 8888           8 8888        8      .8. \`88888.       \`8.\`8888.    8 888888888888           8o. \`Y888888o. 8      .8. \`88888.   88 8888           8 8888         8 888888888888 `,
-//  `88 8888           8 8888        8     .8\`8. \`88888.       \`8.\`8888.   8 8888                   8\`Y8o. \`Y88888o8     .8\`8. \`88888.  88 8888           8 8888         8 8888         `,
-//  `88 8888           8 8888888888888    .8' \`8. \`88888.       \`8.\`8888.  8 8888                   8   \`Y8o. \`Y8888    .8' \`8. \`88888. 88 8888   8888888 8 8888         8 8888         `,
-//  `\`8 8888       .8' 8 8888        8   .8'   \`8. \`88888.  8b   \`8.\`8888. 8 8888                   8      \`Y8o. \`Y8   .8'   \`8. \`88888.\`8 8888       .8' 8 8888         8 8888         `,
-//  `   8888     ,88'  8 8888        8  .888888888. \`88888. \`8b.  ;8.\`8888 8 8888                   8         \`Y8o.\`  .888888888. \`88888.  8888     ,88'  8 8888         8 8888         `,
-//  `    \`8888888P'    8 8888        8 .8'       \`8. \`88888. \`Y8888P ,88P' 8 888888888888           8            \`Yo .8'       \`8. \`88888.  \`8888888P'    8 888888888888 8 888888888888 `]
-
-//const title = [
-//  ' ▄▄·  ▄ .▄ ▄▄▄· .▄▄ · ▄▄▄ .     ▐ ▄  ▄▄▄·  ▄▄ • ▄▄▌  ▄▄▄ .',
-//  '▐█ ▌▪██▪▐█▐█ ▀█ ▐█ ▀. ▀▄.▀·    •█▌▐█▐█ ▀█ ▐█ ▀ ▪██•  ▀▄.▀·',
-//  '██ ▄▄██▀▐█▄█▀▀█ ▄▀▀▀█▄▐▀▀▪▄    ▐█▐▐▌▄█▀▀█ ▄█ ▀█▄██▪  ▐▀▀▪▄',
-//  '▐███▌██▌▐▀▐█ ▪▐▌▐█▄▪▐█▐█▄▄▌    ██▐█▌▐█ ▪▐▌▐█▄▪▐█▐█▌▐▌▐█▄▄▌',
-//  '·▀▀▀ ▀▀▀ · ▀  ▀  ▀▀▀▀  ▀▀▀     ▀▀ █▪ ▀  ▀ ·▀▀▀▀ .▀▀▀  ▀▀▀ ']
-
-//const title = [
-//  `    ___       ___       ___       ___       ___            ___       ___       ___       ___       ___   `,
-//  `   /\\  \\     /\\__\\     /\\  \\     /\\  \\     /\\  \\          /\\__\\     /\\  \\     /\\  \\     /\\__\\     /\\  \\  `,
-//  `  /::\\  \\   /:/__/_   /::\\  \\   /::\\  \\   /::\\  \\        /:| _|_   /::\\  \\   /::\\  \\   /:/  /    /::\\  \\ `,
-//  ` /:/\\:\\__\\ /::\\/\\__\\ /::\\:\\__\\ /\\:\\:\\__\\ /::\\:\\__\\      /::|/\\__\\ /::\\:\\__\\ /:/\\:\\__\\ /:/__/    /::\\:\\__\\`,
-//  ` \\:\\ \\/__/ \\/\\::/  / \\/\\::/  / \\:\\:\\/__/ \\:\\:\\/  /      \\/|::/  / \\/\\::/  / \\:\\:\\/__/ \\:\\  \\    \\:\\:\\/  /`,
-//  `  \\:\\__\\     /:/  /    /:/  /   \\::/  /   \\:\\/  /         |:/  /    /:/  /   \\::/  /   \\:\\__\\    \\:\\/  / `,
-//  `   \\/__/     \\/__/     \\/__/     \\/__/     \\/__/          \\/__/     \\/__/     \\/__/     \\/__/     \\/__/  `,
-//]
 
 const title = [
   ` ██████╗██╗  ██╗ █████╗ ███████╗███████╗    ███╗   ██╗ █████╗  ██████╗ ██╗     ███████╗`,
@@ -82,6 +50,11 @@ addEventListener("wheel", (event) => {
   scrollDeta = Math.abs(event.deltaY);
 })
 
+const elements = [];
+
+const addElement = (element) => {
+  elements.push(element);
+}
 
 
 function lumToChar(lum, map) {
@@ -114,6 +87,8 @@ function drawLine(str, x, y, style) {
     }
   }
 }
+
+
 
 let fragmentFunction = (x, y) => {
   let n = noise.simplex3(x / 50, y / 50, time / 10 * 3);
@@ -148,14 +123,6 @@ const drawBackground = () => {
 }
 
 
-const newWindow = new Window(85, 50, 6, 13);
-newWindow.setBorderStyle("round");
-newWindow.setFragFunc(fragmentFunction);
-
-
-const secondWindow = new Window(85, 50, 100, 13);
-secondWindow.setBorderStyle("double");
-secondWindow.setFragFunc(fragmentFunction);
 
 
 
@@ -169,13 +136,10 @@ const drawScreen = () => {
   }
   drawLine("Work in progress! Come back later. Or not, I push to main often ;)", 8, 10,
     `color : ${love}; font-weight: bold; font-style: italic`);
-  newWindow.drawWindow();
-  secondWindow.drawWindow();
-
+  elements.forEach((i) => { i.render(); })
 
   test.innerHTML = display_surface.join('');
 }
-
 
 
 
@@ -192,8 +156,13 @@ const draw = () => {
 addEventListener("resize", () => {
   nWidth = window.innerWidth;
   nHeight = window.innerHeight;
+  let x_delta = width;
+  let y_delta = height;
   height = Math.round(nHeight / 15) - 1;
   width = Math.round(nWidth / 7.828) - 1;
+  x_delta -= width;
+  y_delta -= height;
+  elements.forEach((i) => { i.resize(x_delta, y_delta); })
   drawScreen();
   console.log(width, height);
 })

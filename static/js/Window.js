@@ -7,6 +7,8 @@
 
 class Window {
   constructor(w, h, x, y) {
+    this.max_w = w;
+    this.max_h = h;
     this.w = w;
     this.h = h;
     this.x = x;
@@ -26,6 +28,8 @@ class Window {
 
 
   }
+
+  elements = [];
 
 
   setBorderStyle = (style) => {
@@ -119,12 +123,26 @@ class Window {
 
   }
 
+  //TODO: Resizing causes the whole ascii thing to break. Something about it not looping. I am not sure why is does it yet.
+  //But we should work on resizing stuff. A possible solution could be letting each window have its own resize event.
+  //
+  //
+  padding = 10;
 
+  resize = (x_delta, y_delta) => {
+    this.w -= x_delta;
+    this.h -= y_delta;
 
-  drawWindow = () => {
+    if (this.w > this.max_w || this.x + this.w < width - this.padding) this.w = this.max_w;
+    if (this.h > this.max_h) this.h = this.max_h;
+
+  }
+
+  render = () => {
     this.drawBackground();
     this.drawBorder();
     this.onHover();
+    this.elements.forEach((i) => { i.render });
 
 
 

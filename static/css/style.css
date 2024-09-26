@@ -10,11 +10,10 @@ html, body{
 	overscroll-behavior-y: none;
 }
 
-body{
-	display: flex;
-	text-align: center;
-	justify-content: center;
-}
+
+
+
+
 
 #screen{
 	margin: 0px;
