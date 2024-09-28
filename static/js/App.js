@@ -32,7 +32,14 @@ mobile_link.setHoverColor(foam);
 
 
 render = () => {
-  if (!isMobile) {
+  if (isMobile) {
+
+    return;
+  }
+
+  link.render();
+
+  if (false) {
     for (let i = 0; i < title_desktop.length; i++) {
       drawLine(title_desktop[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
     }
@@ -42,14 +49,7 @@ render = () => {
     link.render();
     secondWindow.render();
   }
-  if (isMobile) {
-    drawLine("Chase Nagle", 2, 9, `color: ${gold}; background-color: #232136`)
-    mobile_link.render();
 
-
-
-
-  }
 
 }
 
