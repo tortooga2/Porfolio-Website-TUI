@@ -24,7 +24,7 @@ link.setHoverColor(foam);
 //secondWindow.addElement(link);
 //
 //
-const mobile_link = new LinkElement("[ GitHub ]", "https://github.com/tortooga2", 3, 3);
+const mobile_link = new LinkElement("[ GitHub ]", "https://github.com/tortooga2", 3, 10);
 mobile_link.setColor(foam);
 mobile_link.setHoverColor(foam);
 
@@ -43,7 +43,7 @@ render = () => {
     secondWindow.render();
   }
   if (isMobile) {
-    drawLine("Chase Nagle", 2, 2, `color: ${gold}; background-color: #232136`)
+    drawLine("Chase Nagle", 2, 9, `color: ${gold}; background-color: #232136`)
     mobile_link.render();
 
 
