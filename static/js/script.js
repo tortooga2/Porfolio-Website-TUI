@@ -31,18 +31,10 @@ const gold = '#f6c177'
 const foam = '#9ccfd8'
 
 
-let title = [];
+let isMobile = false;
 
-const mobile_title = [`Chase Nagle...`];
 
-const title_desktop = [
-  ` ██████╗██╗  ██╗ █████╗ ███████╗███████╗    ███╗   ██╗ █████╗  ██████╗ ██╗     ███████╗`,
-  `██╔════╝██║  ██║██╔══██╗██╔════╝██╔════╝    ████╗  ██║██╔══██╗██╔════╝ ██║     ██╔════╝`,
-  `██║     ███████║███████║███████╗█████╗      ██╔██╗ ██║███████║██║  ███╗██║     █████╗  `,
-  `██║     ██╔══██║██╔══██║╚════██║██╔══╝      ██║╚██╗██║██╔══██║██║   ██║██║     ██╔══╝  `,
-  `╚██████╗██║  ██║██║  ██║███████║███████╗    ██║ ╚████║██║  ██║╚██████╔╝███████╗███████╗`,
-  ` ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝`,
-]
+
 
 
 
@@ -51,16 +43,13 @@ const test = document.createElement("pre");
 showHere.appendChild(test);
 
 
-addEventListener("wheel", (event) => {
-  scrollAmount += event.deltaY * 0.007;
-  scrollDeta = Math.abs(event.deltaY);
-})
 
-if (width > title_desktop[0].length) {
-  title = title_desktop;
+
+if (width > 95) {
+  isMobile = false;
 }
 else {
-  title = mobile_title;
+  isMobile = true;
 }
 
 const elements = [];
@@ -96,7 +85,6 @@ function lumToChar(lum, map) {
 
 function drawLine(str, x, y, style) {
 
-  let width_offset = Math.round(str.length / 2);
   let index = x + y * width;
 
   for (let i = 0; i < str.length; i++) {
@@ -152,11 +140,8 @@ let render = () => {
 const drawScreen = () => {
   display_surface = [];
   drawBackground();
-  for (let i = 0; i < title.length; i++) {
-    drawLine(title[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
-  }
-  drawLine("Work in progress! Come back later. ", 8, 10,
-    `color : ${love}; font-weight: bold; font-style: italic`);
+
+
   //elements.forEach((i) => { i.render(); })
   render();
 
@@ -181,13 +166,14 @@ addEventListener("resize", () => {
 
   height = Math.round(nHeight / 15) - 1;
   width = Math.round(nWidth / 7.828) - 1;
+  console.log(width);
   delta_x -= width;
   delta_y -= height;
-  if (width < title_desktop[0].length + 20) {
-    title = mobile_title;
+  if (width > 95) {
+    isMobile = false;
   }
   else {
-    title = title_desktop;
+    isMobile = true;
   }
   elements.forEach((i) => { i.resize(width, height, delta_x, delta_y); })
   drawScreen();
@@ -205,6 +191,11 @@ addEventListener("mousedown", (event) => {
 
 addEventListener("mouseup", (event) => {
   mouseDown = false;
+})
+
+addEventListener("wheel", (event) => {
+  scrollAmount += event.deltaY * 0.007;
+  scrollDeta = Math.abs(event.deltaY);
 })
 
 // listen to "scroll" event
