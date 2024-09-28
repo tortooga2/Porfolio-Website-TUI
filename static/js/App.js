@@ -33,6 +33,10 @@ mobile_link.setHoverColor(foam);
 
 render = () => {
   if (isMobile) {
+    drawLine("Chase Nagle", 0, 0, `color: ${gold}`)
+    drawLine("Work in progress! Come back later. ", 8, 10,
+      `color : ${love}; font-weight: bold; font-style: italic`);
+
     link.render();
     return;
   }
