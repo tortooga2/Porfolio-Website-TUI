@@ -88,7 +88,7 @@ function drawLine(str, x, y, style) {
   let index = x + y * width;
 
   for (let i = 0; i < str.length; i++) {
-    if (index > 0 && index + i < height * width) {
+    if (index > 0 && index + i < height * width && x + i < width) {
       display_surface[index + i] = `<span style="${style}">` + str[i] + `</span>`;
       //display_surface[index + i] = str[i];
     }

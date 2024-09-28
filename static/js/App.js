@@ -33,22 +33,18 @@ mobile_link.setHoverColor(foam);
 
 render = () => {
   if (isMobile) {
-
+    link.render();
     return;
   }
-
-  link.render();
-
-  if (false) {
-    for (let i = 0; i < title_desktop.length; i++) {
-      drawLine(title_desktop[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
-    }
-    drawLine("Work in progress! Come back later. ", 8, 10,
-      `color : ${love}; font-weight: bold; font-style: italic`);
-    newWindow.render();
-    link.render();
-    secondWindow.render();
+  for (let i = 0; i < title_desktop.length; i++) {
+    drawLine(title_desktop[i], 5, 3 + i, `color: ${gold}; background-color: #232136`);
   }
+  drawLine("Work in progress! Come back later. ", 8, 10,
+    `color : ${love}; font-weight: bold; font-style: italic`);
+  newWindow.render();
+  link.render();
+  secondWindow.render();
+
 
 
 }

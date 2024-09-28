@@ -184,7 +184,7 @@ class Window {
   render = () => {
     this.drawBackground();
     this.drawBorder();
-    //this.onHover();
+    this.onHover();
     this.elements.forEach((i) => { i.render() });
 
 
