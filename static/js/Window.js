@@ -7,6 +7,9 @@
 
 class Window {
   constructor(w, h, x, y) {
+
+    this.parent = null;
+
     this.max_w = w;
     this.max_h = h;
 
@@ -41,8 +44,19 @@ class Window {
 
   }
 
-
   elements = [];
+
+
+  addElement = (element) => {
+    element.setParent(this);
+    this.elements.push(element);
+
+  }
+
+  setDisplaySurface = (x, y, char) => {
+    this.ds[y][x] = char;
+  }
+
 
   //TODO: NEED TO FIX THIS. WHEN A USER GOES ONTO THE SITE THE WINDOWS DO NOT AUTOMATICALLY RESIZE
 
@@ -143,7 +157,7 @@ class Window {
   //But we should work on resizing stuff. A possible solution could be letting each window have its own resize event.
   //
   //
-  padding = 10;
+  padding = 5;
 
 
 
@@ -168,11 +182,10 @@ class Window {
   }
 
   render = () => {
-    console.log("Window width: ", this.w);
     this.drawBackground();
     this.drawBorder();
-    this.onHover();
-    this.elements.forEach((i) => { i.render });
+    //this.onHover();
+    this.elements.forEach((i) => { i.render() });
 
 
 

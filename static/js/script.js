@@ -13,6 +13,7 @@ let scrollAmount = 0;
 let scrollDeta = 0;
 
 let mouseX, mouseY = 0;
+let mouseDown = false;
 
 const lum_map = " .:-=+*#%@";
 
@@ -63,6 +64,9 @@ else {
 }
 
 const elements = [];
+
+
+
 
 const addElement = (element) => {
   elements.push(element);
@@ -138,7 +142,10 @@ const drawBackground = () => {
 }
 
 
+let render = () => {
+  //elements.forEach((i) => { i.render(); })
 
+}
 
 
 
@@ -150,11 +157,11 @@ const drawScreen = () => {
   }
   drawLine("Work in progress! Come back later. ", 8, 10,
     `color : ${love}; font-weight: bold; font-style: italic`);
-  elements.forEach((i) => { i.render(); })
+  //elements.forEach((i) => { i.render(); })
+  render();
 
   test.innerHTML = display_surface.join('');
 }
-
 
 
 
@@ -187,9 +194,17 @@ addEventListener("resize", () => {
 })
 
 addEventListener("mousemove", (event) => {
-  mouseX = event.clientX / 7.828;
-  mouseY = event.clientY / 15;
+  mouseX = Math.floor((event.clientX - (7.828 / 2)) / 7.828);
+  mouseY = Math.floor((event.clientY - (15 / 2)) / 15);
 
+})
+
+addEventListener("mousedown", (event) => {
+  mouseDown = true;
+})
+
+addEventListener("mouseup", (event) => {
+  mouseDown = false;
 })
 
 // listen to "scroll" event
