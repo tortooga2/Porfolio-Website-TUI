@@ -21,7 +21,7 @@ secondWindow.setBorderStyle("double");
 secondWindow.setFragFunc(fragmentFunction);
 newWindow.addElement(secondWindow)
 
-const link = new LinkElement("[ GitHub ]", "https://github.com/tortooga2", 3, 12);
+const link = new LinkElement("[ GitHub]", "https://github.com/tortooga2", 3, 12);
 link.setColor(foam);
 link.setHoverColor(foam);
 link.setFontWeight("bold")
