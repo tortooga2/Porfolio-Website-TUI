@@ -6,6 +6,8 @@ class LinkElement {
     this.url = url;
     this.x = x;
     this.y = y;
+    this.max_x = x;
+    this.max_y = y;
     this.backgroundColor = "#232136";
 
     this.hoverColor = "";
@@ -13,11 +15,7 @@ class LinkElement {
     this.fontWeight = "none";
     this.fontStyle = "none";
     this.parent = null;
-
-
-
   }
-
   setParent(parent) {
     this.parent = parent;
   }
@@ -27,21 +25,22 @@ class LinkElement {
   setHoverColor(color) {
     this.hoverColor = color;
   }
+  setFontWeight(weight) {
+    this.fontWeight = weight;
+  }
 
   checkHover = () => {
     //if (this.selectable) {
+    //
+    let { x, y } = this.getGlobalPos();
 
-    let offsetx = 0;
-    let offsety = 0;
-    if (this.parent != null) {
-      offsetx = this.parent.x + 1;
-      offsety = this.parent.y + 1;
-    }
-    if (mouseX >= this.x + offsetx && mouseX <= this.x + offsetx + this.text.length && mouseY == this.y + offsety) {
+
+    if (mouseX >= x && mouseX <= x + this.text.length && mouseY == y) {
       this.backgroundColor = this.hoverColor;
       this.textColor = '#232136';
       if (mouseDown) {
         window.open(this.url, '_blank')
+        mouseDown = false;
       }
 
     }
@@ -50,40 +49,44 @@ class LinkElement {
       this.backgroundColor = '#232136'
     }
   }
+  //TODO: Must figure out resize rule!
+  resize = (width, height, x_delta, y_delta) => {
+
+    //    if (this.x + this.text.length >= width - 1) {
+    //      this.x -= (this.x + this.text.length - width);
+    //    } else {
+    //      this.x = this.max_x
+    //    }
+    //    if (this.y <= height - 1) {
+    //      this.y -= (this.y - width);
+    //    } else {
+    //      this.y = this.max_y;
+    //    }
+  }
 
 
 
-
-
-
+  getGlobalPos = () => {
+    let x = this.x;
+    let y = this.y;
+    if (this.parent != null) {
+      let parentPos = this.parent.getGlobalPos();
+      x += parentPos.x;
+      y += parentPos.y;
+    }
+    return { x, y };
+  }
 
   render = () => {
-    console.log("Rendering this link", this.text)
     this.checkHover()
     //let width_offset = Math.round(this.text.length / 2);
 
-    if (this.parent != null) {
-      let y = this.y;
-      let x = this.x - 1;
-      for (let i = 0; i < this.text.length; i++) {
-        x += 1;
-        if (x > this.parent.w) {
-          x = this.x;
-          y += 1;
-        }
-        this.parent.ds[y][x] = `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}; font-weight: ${this.fontWeight}; font-style: ${this.fontStyle}">` + this.text[i] + `</span>`
-      }
-
-    } else {
-      let index = this.x + this.y * width;
-
-
-      for (let i = 0; i < this.text.length; i++) {
-        if (index > 0 && index + i < height * width) {
-          display_surface[index + i] = `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}">` + this.text[i] + `</span>`;
-        }
-      }
+    let { x, y } = this.getGlobalPos();
+    for (let i = 0; i < this.text.length; i++) {
+      display_surface[y][x + i] = `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}; font-weight: ${this.fontWeight}; font-style: ${this.fontStyle}">` + this.text[i] + `</span>`
     }
+
+
 
   }
 

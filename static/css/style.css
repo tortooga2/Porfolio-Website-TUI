@@ -1,24 +1,31 @@
 
 
+html{} 
 
-html, body{
+
+body{
 	margin: 0px;
 	padding: 0px;
+	top: 0%;
 	height: 100vh;
+	width: 100vw;
 	background-color: #232136;
 	color: #6e6a86;
+
 	overscroll-behavior-y: none;
+	white-space: pre;
+	
+}
+
+
+@font-face{
+	font-family : "Fira Code";
+	src: url('FiraCode-regular.ttf') format("truetype");
 }
 
 
 
-
-
-
 #screen{
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
 	display: flex;
 	text-align: center;
 	justify-content: center;
@@ -29,13 +36,16 @@ pre{
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	margin: 0px;
-	font-family: 'Courier New', Courier, monospace;
+	margin: 0;
+//	font-family: 'Courier New', Courier, monospace;
+	font-family: "Fira Code", monospace;
+	//font-family: "Time New Roman", sarif;
+	//font-family: "Roboto Mono";
 	font-size: 13px;
+	
+	
 	//width: 100%;
-	//font-family: 'Fira Code', monospace;
-	
-	
+	//font-family: 'Fira Code', monospace;	
 }
 
 

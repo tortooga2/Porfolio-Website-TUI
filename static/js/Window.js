@@ -53,6 +53,10 @@ class Window {
 
   }
 
+  setParent = (element) => {
+    this.parent = element;
+  }
+
   setDisplaySurface = (x, y, char) => {
     this.ds[y][x] = char;
   }
@@ -140,9 +144,23 @@ class Window {
     }
   }
 
+  getGlobalPos = () => {
+    let x = this.x;
+    let y = this.y;
+    if (this.parent != null) {
+      let parentPos = this.parent.getGlobalPos();
+      x += parentPos.x;
+      y += parentPos.y;
+    }
+    return { x, y };
+  }
+
   onHover() {
     //if (this.selectable) {
-    if (mouseX >= this.x && mouseX <= this.x + this.w && mouseY >= this.y && mouseY <= this.y + this.h) {
+    //
+    let { x, y } = this.getGlobalPos();
+
+    if (mouseX >= x && mouseX <= x + this.w && mouseY >= y && mouseY <= y + this.h) {
       this.fragmentFunction = fragmentFunction;
 
     }
@@ -157,7 +175,7 @@ class Window {
   //But we should work on resizing stuff. A possible solution could be letting each window have its own resize event.
   //
   //
-  padding = 5;
+  padding = 1;
 
 
 
@@ -179,22 +197,20 @@ class Window {
       }
       this.ds.push(temp);
     }
+    this.elements.forEach((i) => { i.resize(this.w, this.h, x_delta, y_delta) })
   }
 
   render = () => {
     this.drawBackground();
     this.drawBorder();
     this.onHover();
-    this.elements.forEach((i) => { i.render() });
 
+    let { x, y } = this.getGlobalPos();
 
 
     for (let i = 0; i < this.h; i++) {
       for (let j = 0; j < this.w; j++) {
-        let global_index = (this.x + j) + (this.y + i) * width;
-        if (global_index >= 0 && global_index < width * height) {
-          display_surface[global_index] = this.ds[i][j];
-        }
+        display_surface[y + i][x + j] = this.ds[i][j];
       }
     }
 

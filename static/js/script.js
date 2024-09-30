@@ -4,8 +4,8 @@ const showHere = document.getElementById("screen")
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
-let height = Math.round(nHeight / 15) - 1;
-let width = Math.round(nWidth / 7.828) - 1;
+let height = Math.round(nHeight / 16) - 1;
+let width = Math.round(nWidth / 8) - 1;
 
 let time = 0;
 
@@ -14,6 +14,9 @@ let scrollDeta = 0;
 
 let mouseX, mouseY = 0;
 let mouseDown = false;
+
+let click_x = 0;
+let click_y = 0;
 
 const lum_map = " .:-=+*#%@";
 
@@ -54,7 +57,9 @@ isMobile = window.mobileCheck();
 const elements = [];
 
 
-
+const setChar = (char, x, y) => {
+  display_surface[y][x] = char;
+}
 
 const addElement = (element) => {
   elements.push(element);
@@ -70,7 +75,26 @@ function lumToChar(lum, map) {
 }
 
 
+const clearDisplaySurface = (width, height) => {
+  display_surface = []
+  for (let i = 0; i < height; i++) {
+    let temp = new Array(width);
+    for (let j = 0; j < width; j++) {
+      temp[j] = " ";
+    }
+    display_surface.push(temp);
+  }
 
+}
+
+const assembleFrame = (display_surface) => {
+  let frame = [];
+  for (let i = 0; i < height; i++) {
+    let temp = display_surface[i].join('');
+    frame.push(temp);
+  }
+  return frame.join('\n');
+}
 
 
 
@@ -83,12 +107,9 @@ function lumToChar(lum, map) {
 //}
 
 function drawLine(str, x, y, style) {
-
-  let index = x + y * width;
-
   for (let i = 0; i < str.length; i++) {
-    if (index > 0 && index + i < height * width && x + i < width) {
-      display_surface[index + i] = `<span style="${style}">` + str[i] + `</span>`;
+    if (x + i >= 0 && x + i < width && y >= 0 && y < height) {
+      display_surface[y][x + i] = `<span style="${style}">` + str[i] + `</span>`;
       //display_surface[index + i] = str[i];
     }
   }
@@ -116,35 +137,28 @@ let fragmentFunction = (x, y) => {
 }
 
 const drawBackground = () => {
-  let index = 0;
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
-      index = x + y * width;
-      display_surface[index] = fragmentFunction(x, y);
+      setChar(fragmentFunction(x, y), x, y);
     }
-
-    display_surface[index] = "\n";
-
   }
 }
 
 
 let render = () => {
   //elements.forEach((i) => { i.render(); })
-
 }
 
 
 
 const drawScreen = () => {
-  display_surface = [];
+  clearDisplaySurface(width, height);
   drawBackground();
-
-
   //elements.forEach((i) => { i.render(); })
   render();
 
-  test.innerHTML = display_surface.join('');
+
+  test.innerHTML = assembleFrame(display_surface);
 }
 
 
@@ -153,6 +167,7 @@ const drawScreen = () => {
 const draw = () => {
   drawScreen();
   time += 0.001;
+  mouseDown = null;
   requestAnimationFrame(draw);
 }
 
@@ -163,9 +178,8 @@ addEventListener("resize", () => {
   let delta_x = width;
   let delta_y = height;
 
-  height = Math.round(nHeight / 15) - 1;
-  width = Math.round(nWidth / 7.828) - 1;
-  console.log(width);
+  height = Math.round(nHeight / 16) - 1;
+  width = Math.round(nWidth / 8) - 1;
   delta_x -= width;
   delta_y -= height;
   if (width > 95) {
@@ -179,15 +193,14 @@ addEventListener("resize", () => {
 })
 
 addEventListener("mousemove", (event) => {
-  mouseX = Math.floor((event.clientX - (7.828 / 2)) / 7.828);
-  mouseY = Math.floor((event.clientY - (15 / 2)) / 15);
+  mouseX = Math.floor((event.clientX - (8 / 2)) / 8);
+  mouseY = Math.floor((event.clientY - (16 / 2)) / 16);
 
 })
 
 addEventListener("mousedown", (event) => {
   mouseDown = true;
 })
-
 addEventListener("mouseup", (event) => {
   mouseDown = false;
 })
@@ -203,9 +216,8 @@ addEventListener("orientationchange", (event) => {
   let delta_x = width;
   let delta_y = height;
 
-  height = Math.round(nHeight / 15) - 1;
-  width = Math.round(nWidth / 7.828) - 1;
-  console.log(width);
+  height = Math.round(nHeight / 16) - 1;
+  width = Math.round(nWidth / 8) - 1;
   delta_x -= width;
   delta_y -= height;
   if (width > 95) {
@@ -221,6 +233,6 @@ addEventListener("orientationchange", (event) => {
 
 // listen to "scroll" event
 
-
+clearDisplaySurface(5, 5);
 requestAnimationFrame(draw)
 
