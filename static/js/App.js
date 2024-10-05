@@ -7,25 +7,31 @@ const title_desktop = [
   ` ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝`,
 ]
 
-const mainWindow = new Window(100, 100, Math.floor(width / 2) - 50, 0);
+const mainWindow = new Window(70, 50, 10, 12);
 mainWindow.setBorderStyle("single");
+mainWindow.setHoverFragFunc(fragmentFunction);
+mainWindow.setBorderColor(muted);
 addElement(mainWindow);
 
-const newWindow = new Window(50, 50, 10, 10);
-newWindow.setBorderStyle("single");
-newWindow.setFragFunc(fragmentFunction);
-mainWindow.addElement(newWindow)
 
-const secondWindow = new Window(25, 25, 10, 10);
-secondWindow.setBorderStyle("double");
-secondWindow.setFragFunc(fragmentFunction);
-newWindow.addElement(secondWindow)
 
-const link = new LinkElement("[ GitHub]", "https://github.com/tortooga2", 3, 12);
-link.setColor(foam);
-link.setHoverColor(foam);
-link.setFontWeight("bold")
-mainWindow.addElement(link);
+const github_link = new LinkElement("[ GitHub]", "https://github.com/tortooga2", 24, 9);
+github_link.setColor(text);
+github_link.setHoverColor(text);
+github_link.setFontWeight("bold")
+addElement(github_link);
+
+const linkin_link = new LinkElement("[󰌻 Linkedin]", "https://linkedin.com/in/chase-nagle-7069a6212", 38, 9)
+linkin_link.setColor(foam);
+linkin_link.setHoverColor(foam);
+linkin_link.setFontWeight("bold");
+addElement(linkin_link);
+
+const cv_link = new LinkElement("[ Resume]", "/static/files/Chase_Nagle_CV.pdf", 55, 9)
+cv_link.setColor(love);
+cv_link.setHoverColor(love);
+cv_link.setFontWeight("bold");
+addElement(cv_link);
 
 const art = new Art(title_desktop, 1, 1);
 art.setColor(gold);
@@ -36,9 +42,10 @@ addElement(art);
 render = () => {
   art.render();
   mainWindow.render();
-  newWindow.render();
-  secondWindow.render();
-  link.render();
+
+  github_link.render();
+  linkin_link.render();
+  cv_link.render();
 
   //newWindow.render();
   //if (isMobile) {
