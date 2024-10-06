@@ -15,19 +15,19 @@ addElement(mainWindow);
 
 
 
-const github_link = new LinkElement("[ GitHub]", "https://github.com/tortooga2", 24, 9);
+const github_link = new LinkElement("[ GitHub]", "https://github.com/tortooga2", 24, 8);
 github_link.setColor(text);
 github_link.setHoverColor(text);
 github_link.setFontWeight("bold")
 addElement(github_link);
 
-const linkin_link = new LinkElement("[󰌻 Linkedin]", "https://linkedin.com/in/chase-nagle-7069a6212", 38, 9)
+const linkin_link = new LinkElement("[󰌻 Linkedin]", "https://linkedin.com/in/chase-nagle-7069a6212", 38, 8)
 linkin_link.setColor(foam);
 linkin_link.setHoverColor(foam);
 linkin_link.setFontWeight("bold");
 addElement(linkin_link);
 
-const cv_link = new LinkElement("[ Resume]", "/static/files/Chase_Nagle_CV.pdf", 55, 9)
+const cv_link = new LinkElement("[ Resume]", "/static/files/Chase_Nagle_CV.pdf", 55, 8)
 cv_link.setColor(love);
 cv_link.setHoverColor(love);
 cv_link.setFontWeight("bold");
