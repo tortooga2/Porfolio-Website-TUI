@@ -31,7 +31,13 @@ class Window {
     this.ds = [];
     this.borderStyle = "single"
 
-    this.fragmentFunction = (x, y) => { return " "; };
+    this.borderColor = "none"
+
+
+    this.onHoverFragmentFunction = (x, y) => { return " "; };
+    this.defaultFragmentFunction = (x, y) => { return " "; };
+
+    this.fragmentFunction = this.defaultFragmentFunction;
 
     for (let i = 0; i < this.h; i++) {
       let temp = new Array(this.w);
@@ -71,9 +77,19 @@ class Window {
     this.borderStyle = style;
   }
 
-  setFragFunc = (fragFunc) => {
-    this.fragmentFunction = fragFunc;
+  setBorderColor = (string) => {
+    this.borderColor = string;
   }
+
+  setHoverFragFunc = (fragFunc) => {
+    this.onHoverFragmentFunction = fragFunc;
+  }
+
+  setDefaultFragFunc = (fragFunc) => {
+    this.defaultFragmentFunction = fragFunc;
+  }
+
+
 
 
 
@@ -124,23 +140,25 @@ class Window {
     }
 
     // Top border
-    this.ds[0][0] = tl_corner;
-    this.ds[0][this.w - 1] = tr_corner;
+    this.ds[0][0] = `<span style="color : ${this.borderColor}">` + tl_corner + `</span>`;
+    this.ds[0][this.w - 1] = `<span style="color : ${this.borderColor}">` + tr_corner + `</span>`;
     for (let i = 1; i < this.w - 1; i++) {
-      this.ds[0][i] = horizontal;
+      this.ds[0][i] = `<span style="color : ${this.borderColor}">` + horizontal + `</span>`;
     }
 
     // Bottom border
-    this.ds[this.h - 1][0] = bl_corner;
-    this.ds[this.h - 1][this.w - 1] = br_corner;
+    this.ds[this.h - 1][0] = `<span style="color : ${this.borderColor}">` + bl_corner + `</span>`;
+    this.ds[this.h - 1][this.w - 1] = `<span style="color : ${this.borderColor}">` + br_corner + `</span>`;
     for (let i = 1; i < this.w - 1; i++) {
-      this.ds[this.h - 1][i] = horizontal;
+      this.ds[this.h - 1][i] = `<span style="color : ${this.borderColor}">` + horizontal + `</span>`;
+      ;
     }
 
     // Side borders
     for (let i = 1; i < this.h - 1; i++) {
-      this.ds[i][0] = vertical;
-      this.ds[i][this.w - 1] = vertical;
+      this.ds[i][0] = `<span style="color : ${this.borderColor}">` + vertical + `</span>`;
+      this.ds[i][this.w - 1] = `<span style="color : ${this.borderColor}">` + vertical + `</span>`;
+      ;
     }
   }
 
@@ -161,13 +179,12 @@ class Window {
     let { x, y } = this.getGlobalPos();
 
     if (mouseX >= x && mouseX <= x + this.w && mouseY >= y && mouseY <= y + this.h) {
-      this.fragmentFunction = fragmentFunction;
+      this.fragmentFunction = this.onHoverFragmentFunction;
 
     }
     else {
-      this.fragmentFunction = (x, y) => { return " " };
+      this.fragmentFunction = this.defaultFragmentFunction;
     }
-    //}
 
   }
 

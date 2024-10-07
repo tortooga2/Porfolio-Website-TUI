@@ -83,7 +83,9 @@ class LinkElement {
 
     let { x, y } = this.getGlobalPos();
     for (let i = 0; i < this.text.length; i++) {
-      display_surface[y][x + i] = `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}; font-weight: ${this.fontWeight}; font-style: ${this.fontStyle}">` + this.text[i] + `</span>`
+      if (x + i < width && y < height) {
+        display_surface[y][x + i] = `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}; font-weight: ${this.fontWeight}; font-style: ${this.fontStyle}">` + this.text[i] + `</span>`
+      }
     }
 
 

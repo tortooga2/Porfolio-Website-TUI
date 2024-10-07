@@ -27,6 +27,9 @@ let display_surface = [];
 
 let scrollVelocity = 0;
 
+const muted = '#6e6a86'
+const overlay = '#393552'
+const text = '#e0def4'
 
 const background_color = '#232136'
 
@@ -124,7 +127,7 @@ let fragmentFunction = (x, y) => {
   let n2 = noise.simplex2(x, y);
 
   if (n2 > 0.75) {
-    return `<span style="color : #393552">*</span>`;
+    return `<span style="color : ${overlay}">*</span>`;
   }
   if (n < -0.5) {
     return " "

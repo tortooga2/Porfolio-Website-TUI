@@ -70,8 +70,9 @@ class Art {
 
     for (let i = 0; i < this.h; i++) {
       for (let j = 0; j < this.ascii_art[i].length; j++) {
-
-        display_surface[y + i][x + j] = `<span style="color : ${this.color}; background-color : ${this.background_color}; ">` + this.ascii_art[i][j] + '</span>'
+        if (x + j < width && y + i < height) {
+          display_surface[y + i][x + j] = `<span style="color : ${this.color}; background-color : ${this.background_color}; ">` + this.ascii_art[i][j] + '</span>'
+        }
 
       }
     }
