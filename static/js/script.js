@@ -28,6 +28,8 @@ let display_surface = [];
 let scrollVelocity = 0;
 
 
+const background_color = '#232136'
+
 const rose = '#ea9a97'
 const love = '#eb6f92'
 const gold = '#f6c177'
