@@ -3,12 +3,18 @@ const showHere = document.getElementById("screen");
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
+ratio = (pixelSize) => {
+  return { w: Math.round(pixelSize / 1.625), h: Math.round(pixelSize / 0.8125) }
+}
+
 let standardFontSize = { fs: 13, w: 8, h: 16 };
+let r = ratio(15);
+let midFontSize = { fs: 15, w: r.w, h: r.h };
 let zoomedFontSize = { fs: 16, w: 9.85, h: 20 };
 
 
 let fontSize = standardFontSize;
-if (nWidth > 2500) {
+if (nWidth > 2200) {
   fontSize = zoomedFontSize;
 }
 

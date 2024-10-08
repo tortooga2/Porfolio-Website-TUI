@@ -56,10 +56,10 @@ const art = new Art(title_desktop, 10, 1);
 art.setColor(Colors.gold);
 addElement(art);
 
-//const paragraph_test = new ParagraphWindow(100, 66, 99, 1, test_text);
-//paragraph_test.setBorderStyle("single");
-//paragraph_test.setBorderColor(Colors.muted);
-//addElement(paragraph_test);
+const paragraph_test = new ParagraphWindow(100, 66, 99, 1, test_text);
+paragraph_test.setBorderStyle("single");
+paragraph_test.setBorderColor(Colors.muted);
+addElement(paragraph_test);
 
 render = () => {
   art.render();
@@ -69,7 +69,7 @@ render = () => {
   linkin_link.render();
   cv_link.render();
 
-  // paragraph_test.render();
+  paragraph_test.render();
 
   //newWindow.render();
   //if (isMobile) {
