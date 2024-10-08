@@ -3,10 +3,21 @@ const showHere = document.getElementById("screen");
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
-fontSize = { x: 8, y: 16 };
+let standardFontSize = { fs: 13, w: 8, h: 16 };
+let zoomedFontSize = { fs: 16, w: 9.85, h: 20 };
 
-let height = Math.round(nHeight / fontSize.y) - 1;
-let width = Math.round(nWidth / fontSize.x) - 1;
+
+let fontSize = standardFontSize;
+if (nWidth > 2500) {
+  fontSize = zoomedFontSize;
+}
+
+
+
+
+
+let height = Math.round(nHeight / fontSize.h) - 1;
+let width = Math.round(nWidth / fontSize.w) - 1;
 
 let time = 0;
 
@@ -44,12 +55,13 @@ Colors = {
 let isMobile = false;
 
 const test = document.createElement("pre");
+test.style.fontSize = `${fontSize.fs}px`;
 
 showHere.appendChild(test);
 
-window.mobileCheck = function () {
+window.mobileCheck = function() {
   let check = false;
-  (function (a) {
+  (function(a) {
     if (
       /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
         a
@@ -192,8 +204,8 @@ addEventListener("resize", () => {
   let delta_x = width;
   let delta_y = height;
 
-  height = Math.round(nHeight / 16) - 1;
-  width = Math.round(nWidth / 8) - 1;
+  height = Math.round(nHeight / fontSize.h) - 1;
+  width = Math.round(nWidth / fontSize.w) - 1;
   delta_x -= width;
   delta_y -= height;
   if (width > 95) {
@@ -208,8 +220,8 @@ addEventListener("resize", () => {
 });
 
 addEventListener("mousemove", (event) => {
-  mouseX = Math.floor((event.clientX - 8 / 2) / 8);
-  mouseY = Math.floor((event.clientY - 16 / 2) / 16);
+  mouseX = Math.floor((event.clientX - fontSize.w / 2) / fontSize.w);
+  mouseY = Math.floor((event.clientY - fontSize.h / 2) / fontSize.h);
 });
 
 addEventListener("mousedown", (event) => {
@@ -230,8 +242,8 @@ addEventListener("orientationchange", (event) => {
   let delta_x = width;
   let delta_y = height;
 
-  height = Math.round(nHeight / 16) - 1;
-  width = Math.round(nWidth / 8) - 1;
+  height = Math.round(nHeight / fontSize.h) - 1;
+  width = Math.round(nWidth / fontSize.w) - 1;
   delta_x -= width;
   delta_y -= height;
   if (width > 95) {
