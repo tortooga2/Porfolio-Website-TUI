@@ -27,13 +27,14 @@ class ParagraphWindow {
 
     this.focused = false;
     this.is_scrollable = false;
-
-    for (let i = 0; i < this.h; i++) {
-      let temp = new Array(this.w);
-      for (let j = 0; j < this.w; j++) {
-        temp[j] = " ";
+    if (this.w > 0 && this.h > 0) {
+      for (let i = 0; i < this.h; i++) {
+        let temp = new Array(this.w);
+        for (let j = 0; j < this.w; j++) {
+          temp[j] = " ";
+        }
+        this.ds.push(temp);
       }
-      this.ds.push(temp);
     }
 
     this.canScrollDown = false; // Will be set after processing text
@@ -292,6 +293,10 @@ class ParagraphWindow {
   };
 
   render = () => {
+    if (this.w <= 0 || this.h <= 0) {
+      return;
+    }
+
     this.clear_ds();
     this.drawBorder();
     this.onHover();

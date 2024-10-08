@@ -39,13 +39,16 @@ class Window {
 
     this.fragmentFunction = this.defaultFragmentFunction;
 
-    for (let i = 0; i < this.h; i++) {
-      let temp = new Array(this.w);
-      for (let j = 0; j < this.w; j++) {
-        temp[j] = " ";
+    if (this.w > 0 && this.h > 0) {
+      for (let i = 0; i < this.h; i++) {
+        let temp = new Array(this.w);
+        for (let j = 0; j < this.w; j++) {
+          temp[j] = " ";
+        }
+        this.ds.push(temp);
       }
-      this.ds.push(temp);
     }
+
 
 
   }
@@ -218,6 +221,9 @@ class Window {
   }
 
   render = () => {
+    if (this.w <= 0 || this.h <= 0) {
+      return;
+    }
     this.drawBackground();
     this.drawBorder();
     this.onHover();
