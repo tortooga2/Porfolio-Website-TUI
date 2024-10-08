@@ -26,7 +26,8 @@ class LinkElement {
     this.hoverColor = color;
   }
   setFontWeight(weight) {
-    this.fontWeight = weight;
+    if (!isSafari)
+      this.fontWeight = weight;
   }
 
   checkHover = () => {
