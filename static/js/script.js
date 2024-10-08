@@ -4,23 +4,21 @@ let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
 ratio = (pixelSize) => {
-  return { w: Math.round(pixelSize / 1.625), h: Math.round(pixelSize / 0.8125) }
-}
+  return {
+    w: Math.round(pixelSize / 1.625),
+    h: Math.round(pixelSize / 0.8125),
+  };
+};
 
 let standardFontSize = { fs: 13, w: 8, h: 16 };
-let r = ratio(15);
-let midFontSize = { fs: 15, w: r.w, h: r.h };
+let midFontSize = { fs: 14, w: 9.23, h: 19 };
+let largeFontSize = { fs: 15, w: 9.23, h: 19 };
 let zoomedFontSize = { fs: 16, w: 9.85, h: 20 };
-
 
 let fontSize = standardFontSize;
 if (nWidth > 2200) {
-  fontSize = midFontSize;
+  fontSize = largeFontSize;
 }
-
-
-
-
 
 let height = Math.round(nHeight / fontSize.h) - 1;
 let width = Math.round(nWidth / fontSize.w) - 1;
@@ -65,9 +63,9 @@ test.style.fontSize = `${fontSize.fs}px`;
 
 showHere.appendChild(test);
 
-window.mobileCheck = function() {
+window.mobileCheck = function () {
   let check = false;
-  (function(a) {
+  (function (a) {
     if (
       /(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(
         a
