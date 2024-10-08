@@ -17,7 +17,7 @@ let zoomedFontSize = { fs: 16, w: 9.85, h: 20 };
 
 let fontSize = standardFontSize;
 if (nWidth > 2200) {
-  fontSize = largeFontSize;
+  fontSize = zoomedFontSize;
 }
 
 let height = Math.round(nHeight / fontSize.h) - 1;
