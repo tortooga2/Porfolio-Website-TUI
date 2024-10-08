@@ -15,7 +15,7 @@ let zoomedFontSize = { fs: 16, w: 9.85, h: 20 };
 
 let fontSize = standardFontSize;
 if (nWidth > 2200) {
-  fontSize = zoomedFontSize;
+  fontSize = midFontSize;
 }
 
 
