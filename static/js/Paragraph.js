@@ -278,8 +278,15 @@ class ParagraphWindow {
     for (let i = startLine, dsRow = 1; i < endLine; i++, dsRow++) {
       let line = this.textLines[i];
       for (let j = 0; j < line.length && j < this.w - 2; j++) {
-        this.ds[dsRow][j + 1] =
-          `<span style="color: ${this.textColor}">` + line[j] + `</span>`;
+        let character = "";
+        if (j === 0) {
+          character = `<span style="color: ${this.textColor}">` + line[j];
+        } else if (j === line.length - 1) {
+          character = line[j] + `</span>`;
+        } else {
+          character = line[j];
+        }
+        this.ds[dsRow][j + 1] = character;
       }
     }
   };

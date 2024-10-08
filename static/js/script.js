@@ -3,8 +3,10 @@ const showHere = document.getElementById("screen");
 let nWidth = window.innerWidth;
 let nHeight = window.innerHeight;
 
-let height = Math.round(nHeight / 16) - 1;
-let width = Math.round(nWidth / 8) - 1;
+fontSize = { x: 8, y: 16 };
+
+let height = Math.round(nHeight / fontSize.y) - 1;
+let width = Math.round(nWidth / fontSize.x) - 1;
 
 let time = 0;
 
@@ -120,11 +122,11 @@ function drawLine(str, x, y, style) {
 
 let fragmentFunction = (x, y) => {
   let n = noise.simplex3(x / 50, y / 50, (time / 10) * 3);
-  let n2 = noise.simplex2(x, y);
+  //let n2 = noise.simplex2(x, y);
 
-  if (n2 > 0.75) {
-    return `<span style="color : ${Colors.overlay}">*</span>`;
-  }
+  // if (n2 > 0.75) {
+  //   return `<span style="color : ${Colors.overlay}">*</span>`;
+  // }
   if (n < -0.5) {
     return " ";
   }
@@ -148,17 +150,37 @@ let render = () => {
   //elements.forEach((i) => { i.render(); })
 };
 
+let frameTimes = [];
+let lastFrameTime = performance.now();
+
 const drawScreen = () => {
+  const now = performance.now();
+  const delta = now - lastFrameTime;
+  lastFrameTime = now;
+
+  frameTimes.push(delta);
+
+  // Keep only the last 100 frame times
+  if (frameTimes.length > 100) {
+    frameTimes.shift();
+  }
+
+  // Calculate average frame time
+  const averageTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
+  const fps = Math.round(1000 / averageTime);
+
   clearDisplaySurface(width, height);
   drawBackground();
   //elements.forEach((i) => { i.render(); })
   render();
+  drawLine(`FPS: ${fps}`, 10, 10, `color: ${Colors.gold}`);
 
   test.innerHTML = assembleFrame(display_surface);
 };
 
 const draw = () => {
   drawScreen();
+
   time += 0.001;
   mouseDown = null;
   requestAnimationFrame(draw);
