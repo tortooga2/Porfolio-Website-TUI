@@ -29,6 +29,9 @@ class LinkElement {
     if (!isSafari)
       this.fontWeight = weight;
   }
+  AlignVertically = (w, h) => {
+    this.x = Math.floor(w / 2) - Math.floor(this.text.length / 2)
+  }
 
   checkHover = () => {
     //if (this.selectable) {

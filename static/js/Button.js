@@ -1,6 +1,7 @@
-class ButtonElement {
-  constructor(text, x, y, func) {
+class Button {
+  constructor(text, x, y) {
     this.text = text;
+
     this.x = x;
     this.y = y;
     this.max_x = x;
@@ -13,8 +14,7 @@ class ButtonElement {
     this.fontStyle = "none";
     this.parent = null;
 
-    this.command = func;
-    this.selectable = true;
+    this.onClick = null;
   }
   setParent(parent) {
     this.parent = parent;
@@ -26,12 +26,15 @@ class ButtonElement {
     this.hoverColor = color;
   }
   setFontWeight(weight) {
-    if (!isSafari)
-      this.fontWeight = weight;
+    if (!isSafari) this.fontWeight = weight;
   }
 
-  setSelectable = (state) => {
-    this.selectable = state;
+  setOnClick = (onClick) => {
+    this.onClick = onClick;
+  };
+
+  AlignVertically = (w, h) => {
+    this.x = Math.floor(w / 2) - Math.floor(this.text.length / 2)
   }
 
   checkHover = () => {
@@ -39,24 +42,22 @@ class ButtonElement {
     //
     let { x, y } = this.getGlobalPos();
 
-
     if (mouseX >= x && mouseX <= x + this.text.length && mouseY == y) {
       this.backgroundColor = this.hoverColor;
-      this.textColor = '#232136';
+      this.textColor = "#232136";
       if (mouseDown) {
-        this.command();
+        if (this.onClick) {
+          this.onClick();
+        }
         mouseDown = false;
       }
-
-    }
-    else {
+    } else {
       this.textColor = this.hoverColor;
-      this.backgroundColor = '#232136'
+      this.backgroundColor = "#232136";
     }
-  }
+  };
   //TODO: Must figure out resize rule!
   resize = (width, height, x_delta, y_delta) => {
-
     //    if (this.x + this.text.length >= width - 1) {
     //      this.x -= (this.x + this.text.length - width);
     //    } else {
@@ -67,9 +68,7 @@ class ButtonElement {
     //    } else {
     //      this.y = this.max_y;
     //    }
-  }
-
-
+  };
 
   getGlobalPos = () => {
     let x = this.x;
@@ -80,21 +79,20 @@ class ButtonElement {
       y += parentPos.y;
     }
     return { x, y };
-  }
+  };
 
   render = () => {
-    this.checkHover()
+    this.checkHover();
     //let width_offset = Math.round(this.text.length / 2);
 
     let { x, y } = this.getGlobalPos();
     for (let i = 0; i < this.text.length; i++) {
-      display_surface[y][x + i] =
-        `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}; font-weight: ${this.fontWeight}; font-style: ${this.fontStyle}">` + this.text[i] + `</span>`;
+      if (x + i < width && y < height) {
+        display_surface[y][x + i] =
+          `<span style="background-color : ${this.backgroundColor}; color : ${this.textColor}; font-weight: ${this.fontWeight}; font-style: ${this.fontStyle}">` +
+          this.text[i] +
+          `</span>`;
+      }
     }
-
-
-
-  }
-
-
+  };
 }

@@ -40,6 +40,10 @@ class Art {
     return max_width;
   };
 
+  AlignVertically = (w, h) => {
+    this.x = Math.floor(w / 2) - Math.floor(this.w / 2)
+  }
+
   getGlobalPos = () => {
     let x = this.x;
     let y = this.y;
@@ -51,7 +55,7 @@ class Art {
     return { x, y };
   };
 
-  resize = (width, height, delta_x, delta_y) => {};
+  resize = (width, height, delta_x, delta_y) => { };
 
   render = () => {
     let { x, y } = this.getGlobalPos();
