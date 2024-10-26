@@ -8,6 +8,8 @@ class LinkElement {
     this.y = y;
     this.max_x = x;
     this.max_y = y;
+    this.w = text.length;
+    this.h = 1;
     this.backgroundColor = "#232136";
 
     this.hoverColor = "";

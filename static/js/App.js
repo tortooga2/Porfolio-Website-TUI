@@ -27,7 +27,9 @@ const art = new Art(title_desktop, 7, 2);
 art.setColor(Colors.gold);
 vertWindow.addElement(art);
 
-
+const horzWindow = new Horizontal_Align(1, 1, 0, 0);
+vertWindow.addElement(horzWindow);
+horzWindow.setMargin(10);
 
 
 const github_link = new LinkElement(
@@ -39,7 +41,7 @@ const github_link = new LinkElement(
 github_link.setColor(Colors.text);
 github_link.setHoverColor(Colors.text);
 github_link.setFontWeight("bold");
-vertWindow.addElement(github_link);
+horzWindow.addElement(github_link);
 
 const linkin_link = new LinkElement(
   "[ Linkedin]",
@@ -50,7 +52,7 @@ const linkin_link = new LinkElement(
 linkin_link.setColor(Colors.foam);
 linkin_link.setHoverColor(Colors.foam);
 linkin_link.setFontWeight("bold");
-vertWindow.addElement(linkin_link);
+horzWindow.addElement(linkin_link);
 
 const cv_link = new LinkElement(
   "[ Resume]",
@@ -61,7 +63,7 @@ const cv_link = new LinkElement(
 cv_link.setColor(Colors.love);
 cv_link.setHoverColor(Colors.love);
 cv_link.setFontWeight("bold");
-vertWindow.addElement(cv_link);
+horzWindow.addElement(cv_link);
 
 
 

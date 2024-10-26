@@ -1,5 +1,6 @@
 
-class Vertical_Align {
+
+class Horizontal_Align {
   constructor(w, h, x, y) {
 
     this.parent = null;
@@ -9,6 +10,8 @@ class Vertical_Align {
 
     this.w = w;
     this.h = h;
+
+    this.margin = 0;
 
 
     if (x + w > width - 1) {
@@ -49,16 +52,33 @@ class Vertical_Align {
 
   elements = [];
 
-  updateAligments = () => {
-    this.elements.forEach((i) => {
-      i.AlignVertically(this.w, this.h);
-    })
+  setMargin = (val) => {
+    this.margin = val;
+  }
+
+  AlignVertically = (w, h) => {
+    this.x = Math.floor(w / 2) - Math.floor(this.w / 2)
   }
 
   addElement = (element) => {
-    element.AlignVertically(this.w, this.h);
-    element.setParent(this);
     this.elements.push(element);
+    element.setParent(this);
+
+    let width = 0;
+    for (let i = 0; i < this.elements.length; i++) {
+      this.elements[i].x = width;
+      width += this.elements[i].w;
+
+      if (i != this.elements.length - 1) {
+        width += this.margin;
+      }
+    }
+    this.w = width;
+    this.max_w = width;
+    this.parent.updateAligments();
+
+
+
 
   }
 
