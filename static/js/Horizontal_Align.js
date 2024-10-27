@@ -45,10 +45,8 @@ class Horizontal_Align {
         this.ds.push(temp);
       }
     }
-
-
-
   }
+
 
   elements = [];
 
@@ -238,6 +236,7 @@ class Horizontal_Align {
       this.ds.push(temp);
     }
     this.elements.forEach((i) => { i.resize(this.w, this.h, x_delta, y_delta) })
+
   }
 
   render = () => {

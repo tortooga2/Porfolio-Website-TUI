@@ -48,7 +48,7 @@ Colors = {
   overlay: "#393552",
   text: "#e0def4",
 
-  background_color: "#232136",
+  background_color: "#191724",
 
   rose: "#ea9a97",
   love: "#eb6f92",
