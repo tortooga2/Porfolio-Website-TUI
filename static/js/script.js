@@ -194,7 +194,7 @@ const drawScreen = () => {
   drawBackground();
   //elements.forEach((i) => { i.render(); })
   render();
-  drawLine(`FPS: ${fps}`, 10, 10, `color: ${Colors.gold}`);
+  //drawLine(`FPS: ${fps}`, 10, 10, `color: ${Colors.gold}`);
 
   test.innerHTML = assembleFrame(display_surface);
 };

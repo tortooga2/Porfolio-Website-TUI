@@ -7,8 +7,7 @@ const title_desktop = [
   ` ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝╚══════╝    ╚═╝  ╚═══╝╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚══════╝`,
 ];
 
-//const test_text =
-("a b c d e f g h i j k l m n o p q r s t u v w x y z\n a b c d e f g h i j k l m n o p q r s t u v w x y z\n a b c d e f g h i j k l m n o p q r s t u v w x y z\n a b c d e f g h i j k l m n o p q r s t u v w x y z\n a b c d e f g h i j k l m n o p q r s t u v w x y z\n a b c d e f g h i j k l m n o p q r s t u v w x y z\n");
+
 
 
 const mainWindow = new Window(100, 50, Math.floor(width / 2) - 50, Math.floor(height / 2) - 25);
