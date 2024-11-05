@@ -68,7 +68,7 @@ horzWindow.addElement(cv_link);
 
 let current_window = "Home"
 
-const about_button = new Button("[X]", 96, 1);
+const close_button = new Button("[X]", 96, 1);
 about_button.setOnClick(() => { current_window = "None" })
 about_button.setHoverColor(Colors.muted)
 mainWindow.addElement(about_button);
@@ -89,7 +89,7 @@ render = () => {
     linkin_link.render();
     cv_link.render();
 
-    about_button.render();
+    close_button.render();
 
     work_in_progress.render();
   }
