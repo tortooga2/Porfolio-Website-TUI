@@ -73,7 +73,7 @@ close_button.setOnClick(() => { current_window = "None" })
 close_button.setHoverColor(Colors.muted)
 mainWindow.addElement(close_button);
 
-const work_in_progress = new Button(" Work in Progress. Sorry recruiters but Midterms is more Important. ", 1, 13);
+const work_in_progress = new Button(" Work in Progress. Sorry recruiters but midterms are more important. ", 1, 13);
 work_in_progress.setHoverColor(Colors.love);
 vertWindow.addElement(work_in_progress);
 
