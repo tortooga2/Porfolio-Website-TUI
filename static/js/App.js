@@ -73,6 +73,10 @@ about_button.setOnClick(() => { current_window = "None" })
 about_button.setHoverColor(Colors.muted)
 mainWindow.addElement(about_button);
 
+const work_in_progress = new Button(" Work in Progress. Sorry recruiters but Midterms is more Important. ", 1, 13);
+work_in_progress.setHoverColor(Colors.love);
+vertWindow.addElement(work_in_progress);
+
 
 
 render = () => {
@@ -86,6 +90,8 @@ render = () => {
     cv_link.render();
 
     about_button.render();
+
+    work_in_progress.render();
   }
 
 
