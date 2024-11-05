@@ -69,9 +69,9 @@ horzWindow.addElement(cv_link);
 let current_window = "Home"
 
 const close_button = new Button("[X]", 96, 1);
-about_button.setOnClick(() => { current_window = "None" })
-about_button.setHoverColor(Colors.muted)
-mainWindow.addElement(about_button);
+close_button.setOnClick(() => { current_window = "None" })
+close_button.setHoverColor(Colors.muted)
+mainWindow.addElement(close_button);
 
 const work_in_progress = new Button(" Work in Progress. Sorry recruiters but Midterms is more Important. ", 1, 13);
 work_in_progress.setHoverColor(Colors.love);
